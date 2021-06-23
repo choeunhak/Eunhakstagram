@@ -14,6 +14,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//super.configure(http);//security library에서 여기서 계속 가로채는거임
 		//위의 코드 지우면 기존 시큐리티가 가지고 있는 기능 비활성화
+		
+		
+		http.csrf().disable();//csrf 비활성화
 		http.authorizeRequests()
 			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**, /comment/**").authenticated()
 			.anyRequest().permitAll()//모든요청허용
