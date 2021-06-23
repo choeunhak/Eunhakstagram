@@ -1,14 +1,23 @@
 package com.cos.photogramstart.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity //해당파일로 security 활성화
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
+	
+	//비밀번호 암호화
+	@Bean//bean으로등록, 해시함수
+	public BCryptPasswordEncoder encode() {
+		return new BCryptPasswordEncoder();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		

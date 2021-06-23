@@ -10,9 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -23,7 +26,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//pk자동증가시키기
 	private int id; 
 	
-	@Column(length = 30, unique = true)
+	@Column(length = 30, unique = true)//unique 제약조건
 	private String username;
 	private String password;
 	
