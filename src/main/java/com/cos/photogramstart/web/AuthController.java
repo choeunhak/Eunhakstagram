@@ -49,6 +49,10 @@ public class AuthController {
 	//회원가입버튼을 누르면 -> auth/signup
 	@PostMapping("/auth/signup")
 	public String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {//@responsebody는 파일이 아닌 데이터를응답해준다
+		//bindingresult는 에러를 받을수있다
+		
+		
+		
 		//이렇게만 하면 403에러가 뜸
 		//security가 csrf로 1차적으로막는거다
 		//토큰이 있나검사를한다
