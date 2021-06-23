@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 
@@ -59,7 +60,7 @@ public class AuthController {
 				//System.out.println(error.getDefaultMessage());
 			}
 			//return "오류남";
-			throw new RuntimeException("유효성검사실패");
+			throw new CustomValidationException("유효성검사실패함", errorMap);
 		}else {
 			//log.info(signupDto.toString());
 			User user = signupDto.toEntity();
