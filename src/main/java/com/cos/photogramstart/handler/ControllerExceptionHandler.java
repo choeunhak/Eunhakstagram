@@ -11,6 +11,6 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(RuntimeException.class)//모든 runtime익셉션 낚아챔
 	public String validationException(RuntimeException e) {
 		return e.getMessage();
-		
+		// 깃 테스트
 	}
 }
