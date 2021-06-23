@@ -1,11 +1,18 @@
 package com.cos.photogramstart.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.service.AuthService;
@@ -39,21 +46,31 @@ public class AuthController {
 		return "auth/signup";
 	}
 	
-	//회원가입버튼을 누르면 -> auth/signup으로간다->그후에 csrf토큰으로 막힌다->그래서 disable시킴
+	//회원가입버튼을 누르면 -> auth/signup
 	@PostMapping("/auth/signup")
-	public String signup(SignupDto signupDto) {
+	public @ResponseBody String signup(@Valid SignupDto signupDto, BindingResult bindingResult) {//responsebody는 파일이 아닌 데이터를응답해준다
 		//이렇게만 하면 403에러가 뜸
 		//security가 csrf로 1차적으로막는거다
-		//토큰이 있나 검사를한다
+		//토큰이 있나검사를한다
+		if(bindingResult.hasErrors()) {
+			Map<String, String> errorMap = new HashMap<>();
+			
+			for(FieldError error:bindingResult.getFieldErrors()) {
+				errorMap.put(error.getField(), error.getDefaultMessage());
+				System.out.println(error.getDefaultMessage());
+			}
+			
+			return "오류남";
+		}else {
+			//log.info(signupDto.toString());
+			User user = signupDto.toEntity();
+			
+			User userEntity = authService.회원가입(user);
+			//System.out.println(userEntity);
+			log.info(user.toString());
+			return "auth/signin";
+		}
 		
-		log.info(signupDto.toString());
 		
-		
-		User user = signupDto.toEntity();
-		
-		User userEntity = authService.회원가입(user);
-		System.out.println(userEntity);
-		log.info(user.toString());
-		return "auth/signin";
 	}
 }
