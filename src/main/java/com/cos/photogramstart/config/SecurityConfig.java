@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//위 주소외의 기타주소는 들어가진다. ex /auth 등
 			//자동으로 로그인화면으로가고싶다
 			.and()
-			.formLogin().loginPage("/auth/signin")
+			.formLogin()
+			.loginPage("/auth/signin")//GET //user에 인증이 안되어있으면 이페이지를 던져줌
+			.loginProcessingUrl("/auth/signin")//POST//로그인을 진행하려고하면 여기를 스프링시큐리티가 진행한다
 			.defaultSuccessUrl("/");//로그인성공시 가는페이지
 		
 	}
