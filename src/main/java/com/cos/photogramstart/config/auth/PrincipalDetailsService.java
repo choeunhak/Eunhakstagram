@@ -24,7 +24,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 	//아래 loaduserbyusername 실행됨
 	
 	//1. 패스워드는 알아서 체크하니까 신경안써도된다
-	//리턴이 잘되면 내부적으로 세션을 만들어준다
+	//2. 리턴이 잘되면 내부적으로 세션을 만들어준다
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		//여기서 무엇을할까?
@@ -34,7 +34,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 		if(userEntity == null) {
 			return null;
 		}else {
-			return null;//new PrincipalDetails(userEntity); // SecurityContextHolder => Authentication 객체 내부에 담김.
+			return new PrincipalDetails(userEntity); // SecurityContextHolder => Authentication 객체 내부에 담김.
 		}
 		
 	}
