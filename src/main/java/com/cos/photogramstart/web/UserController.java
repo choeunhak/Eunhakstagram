@@ -18,7 +18,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/{id}/update")
-	public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+	public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
 		
 		
@@ -31,7 +31,7 @@ public class UserController {
 		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		//System.out.println(auth.getPrincipal());
 		
-		model.addAttribute("principal", principalDetails.getUser());
+//		model.addAttribute("principal", principalDetails.getUser());
 		return "user/update";
 	}
 
