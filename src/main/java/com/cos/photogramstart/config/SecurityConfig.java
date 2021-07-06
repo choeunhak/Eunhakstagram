@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().disable();//csrf 비활성화
 		http.authorizeRequests()
-			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**, /comment/**").authenticated()
+			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**, /comment/**", "/api/**").authenticated()
 			.anyRequest().permitAll()//모든요청허용
 			//위 주소외의 기타주소는 들어가진다. ex /auth 등
 			//자동으로 로그인화면으로가고싶다

@@ -27,7 +27,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(//unique 제약조건 두개에 복합적으로 걸기
-		name="subscribe",
 		uniqueConstraints={
 			@UniqueConstraint(
 				name = "subscribe_uk",
