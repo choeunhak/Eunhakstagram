@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,8 +22,10 @@ public class UserService {
 	@Transactional
 	public User 회원수정(int id, User user) {
 		
-		//1. 서비스에서는 영속화를해야한다
-		User userEntity = userRepository.findById(id).get();
+		//1. 서비스에서는 영속화를해야한다, 람다로 변경
+		User userEntity = userRepository.findById(id).orElseThrow(() -> {
+			return new CustomValidationApiException("찾을수없는id입니다.");
+		});
 		
 		
 		String rawPassword = user.getPassword();
