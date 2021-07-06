@@ -19,10 +19,9 @@ public class UserUpdateDto {
 	private String gender;
 	
 	
-	//db에 저장(간단한 방식)
 	public User toEntity() {
 		return User.builder()
-				.password(password)
+				.password(password)//공백이 들어갈 위험이 있다, validation 체크를해야한다
 				.name(name)
 				.website(website)
 				.bio(bio)
