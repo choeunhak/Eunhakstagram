@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
+import com.cos.photogramstart.util.Script;
 import com.cos.photogramstart.web.dto.CMRespDto;
 
 @RestController
@@ -20,8 +21,14 @@ public class ControllerExceptionHandler {
 	
 	//자바스크립트 리턴, Script.back(e.getErrorMap().toString())하면됨)
 	@ExceptionHandler(CustomValidationException.class)//모든 runtime익셉션 낚아챔
-	public CMRespDto<Map<String, String>> validationException(CustomValidationException e) {//뭘 return할지 모르겠으면 그냥 <?>이렇게하면된다
-		return new CMRespDto(-1, e.getMessage(), e.getErrorMap());
+	public String validationException(CustomValidationException e) {//뭘 return할지 모르겠으면 그냥 <?>이렇게하면된다
+		
+		if(e.getErrorMap()==null) {
+			return Script.back(e.getMessage());
+		}else {
+			return Script.back(e.getErrorMap().toString());
+		}
+		
 		
 	}
 	
