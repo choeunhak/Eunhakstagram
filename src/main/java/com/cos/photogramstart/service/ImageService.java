@@ -29,6 +29,25 @@ public class ImageService {
 	@Transactional(readOnly = true)
 	public Page<Image> 이미지스토리(int principalId, Pageable pageable){
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
+		
+		
+		//image에 좋아요 상태 담기 
+		// 좋아요 하트 색깔 로직 + 좋아요 카운트 로직
+			images.forEach((image)-> {
+				
+				
+				//2번이 로그인하고 이미지들을 쫙 들고오고  이미지들을 돌려서 좋아요정보를 봅아내서 내가 좋아요한건지만알면된다
+//				int likeCount = image.getLikes().size();
+//				image.setLikeCount(likeCount);
+				
+				image.getLikes().forEach((like)->{
+					if(like.getUser().getId() == principalId) {//해당이미지 좋아요한사람들을 찾아서 현재 로긴한사람이 좋아요한것인지 비교
+						image.setLikeState(true);
+					}
+				});
+			});
+			
+		
 		return images;
 	}
 	

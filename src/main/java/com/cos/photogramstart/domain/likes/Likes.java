@@ -40,6 +40,8 @@ public class Likes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	
+	//무한참조버그
 	@ManyToOne//1번 좋아요정보를 select할때 image와 user를 eager로 가져온다(manytoone은 eager이 기본), like : image가 N:1
 	@JoinColumn(name = "imageId")
 	private Image image;
