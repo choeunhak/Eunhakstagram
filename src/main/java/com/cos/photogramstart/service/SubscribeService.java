@@ -54,6 +54,7 @@ public class SubscribeService {
 				.setParameter(2, principalId)
 				.setParameter(3, pageUserId);
 		
+		//qlrm dto에디비결과를 매핑하기위해활용
 		JpaResultMapper result  = new JpaResultMapper();
 		List<SubscribeDto> subscribeDtos = result.list(query, SubscribeDto.class);
 		return subscribeDtos;

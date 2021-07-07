@@ -14,5 +14,5 @@ public class SubscribeDto {
 	private String username;
 	private String profileImageUrl;
 	private Integer subscribeState; // mariadb에서는 Integer
-	private Integer equalState;
+	private Integer equalUserState;
 }
