@@ -1,9 +1,9 @@
 package com.cos.photogramstart.service;
 
-import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
@@ -20,6 +20,8 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	
+	@Transactional(readOnly=true)//리드오니가 jpa를 일을 덜하게 해줄수있다(계속 감지하지않게함)
 	public User 회원프로필(int userId) {
 		
 		User userEntity = userRepository.findById(userId).orElseThrow(()->{
