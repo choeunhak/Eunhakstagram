@@ -44,7 +44,7 @@ public class Image {
 	private User user;//누가 업로드했는지를 알기위해
 	
 	//이미지 좋아요
-	@JsonIgnoreProperties({"images"})
+	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy="image")//레이지로딩
 	private List<Likes> likes;
 	
