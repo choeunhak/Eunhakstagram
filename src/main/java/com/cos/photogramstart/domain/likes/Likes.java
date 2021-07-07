@@ -49,12 +49,14 @@ public class Likes {
 	@JoinColumn(name = "userId")
 	private User user;
 	
-	public LocalDateTime createDate;
 	
-	@PrePersist//db에 insert되기 직전에 실행
-	public void createDate() {
-		this.createDate = LocalDateTime.now();
-	}
+	
+	public LocalDateTime createDate;
+//	네이티브쿼리기 때문에 아래와 같이 날짜생성이안됨
+//	@PrePersist//db에 insert되기 직전에 실행
+//	public void createDate() {
+//		this.createDate = LocalDateTime.now();
+//	}
 	
 
 
