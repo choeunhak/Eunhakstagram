@@ -37,8 +37,8 @@ public class ImageService {
 				
 				
 				//2번이 로그인하고 이미지들을 쫙 들고오고  이미지들을 돌려서 좋아요정보를 봅아내서 내가 좋아요한건지만알면된다
-//				int likeCount = image.getLikes().size();
-//				image.setLikeCount(likeCount);
+				int likeCount = image.getLikes().size();
+				image.setLikeCount(likeCount);
 				
 				image.getLikes().forEach((like)->{
 					if(like.getUser().getId() == principalId) {//해당이미지 좋아요한사람들을 찾아서 현재 로긴한사람이 좋아요한것인지 비교

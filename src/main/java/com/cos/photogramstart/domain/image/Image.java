@@ -53,6 +53,9 @@ public class Image {
 	@Transient//디비에 칼럼이 만들어지지않는다
 	private boolean likeState;
 	
+	@Transient//디비에 칼럼이 만들어지지않는다
+	private int likeCount;
+	
 	
 	//이미지 댓글
 	
