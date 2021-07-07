@@ -6,11 +6,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.TagUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
@@ -25,6 +23,14 @@ import lombok.RequiredArgsConstructor;
 public class ImageService {
 	
 	private final ImageRepository imageRepository;
+	
+	
+	@Transactional(readOnly = true)
+	public List<Image> 이미지스토리(int principalId){
+		List<Image> images = imageRepository.mStory(principalId);
+		return images;
+	}
+	
 	
 	@Value("${file.path}")
 	private String uploadFolder;

@@ -3,6 +3,7 @@ package com.cos.photogramstart.domain.image;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,8 +34,9 @@ public class Image {
 	private String postImageUrl;//사진을 전송받아서 그 사진을 서버에 특정폴더에 저장, db에 그 저장 경로를 insert
 	
 	//FK로 저장
+	@JsonIgnoreProperties({"images"})//유저가 가지고있는 이미지는 무시함
 	@JoinColumn(name="userId")
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)//eager로 가져옴
 	private User user;//누가 업로드했는지를 알기위해
 	
 	//이미지 좋아요
