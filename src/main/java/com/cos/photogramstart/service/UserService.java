@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
@@ -20,7 +21,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+	private final SubscribeRepository subscribeRepository;
 	
 	@Transactional(readOnly=true)//리드오니가 jpa를 일을 덜하게 해줄수있다(계속 감지하지않게함)
 	public UserProfileDto 회원프로필(int pageUserId, int principalId) {
@@ -33,6 +34,14 @@ public class UserService {
 		dto.setUser(userEntity);
 		dto.setPageOwnerState(pageUserId==principalId);
 		dto.setImageCount(userEntity.getImages().size());
+		
+		
+		int subscribeState = subscribeRepository.mSubscribeState(principalId, pageUserId);
+		int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
+		
+		
+		dto.setSubscribeState(subscribeState==1);
+		dto.setSubscribeCount(subscribeCount);
 		return dto;
 	}
 	
