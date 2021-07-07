@@ -52,7 +52,7 @@ public class User {
 	
 	private String role; // USER, ADMIN
 	
-	//양방향매핑하는것!
+	//양방향매핑하는것! maappedby 주인이아니다
 	//나는 연관관계의 주인이 아니기때무네 테이블에 컬럼을 만들지 말고, user를 select할때 해당 userid로 등록된 이미지들을 다 가져와라, //onetomany는 fetchType이 있따 레이지로딩, 즉시로딩, 
 	// lazy는 user를 select할때 해당 userid로 등로된 이미지들을 가져오지마 대신 getImages함수호출될때만 가져온다.,  eager는 user를 select할때 해당 userid로 등로된 이미지들을전부 조인해서 가져와
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
