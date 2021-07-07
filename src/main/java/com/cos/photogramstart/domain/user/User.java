@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
 import com.cos.photogramstart.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,7 +55,8 @@ public class User {
 	//양방향매핑하는것!
 	//나는 연관관계의 주인이 아니기때무네 테이블에 컬럼을 만들지 말고, user를 select할때 해당 userid로 등록된 이미지들을 다 가져와라, //onetomany는 fetchType이 있따 레이지로딩, 즉시로딩, 
 	// lazy는 user를 select할때 해당 userid로 등로된 이미지들을 가져오지마 대신 getImages함수호출될때만 가져온다.,  eager는 user를 select할때 해당 userid로 등로된 이미지들을전부 조인해서 가져와
-	@OneToMany(mappedBy="user") 
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"user"})//내부 user무시하고 파싱함,, 자주사용되니까 암기,, jpa 무한참조해결...!!!
 	private List<Image> images;
 	
 	

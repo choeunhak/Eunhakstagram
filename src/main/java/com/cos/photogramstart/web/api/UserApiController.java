@@ -49,7 +49,7 @@ public class UserApiController {
 				//System.out.println(userUpdateDto);
 		        User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
 		        principalDetails.setUser(userEntity);
-		        return new CMRespDto<>(1, "회원수정완료", userEntity);
+		        return new CMRespDto<>(1, "회원수정완료", userEntity);//응답시에 uesrEntity의 모든 getter함수호출되고 json으로 파싱하여 응답함.
 				
 			}
 	    	
