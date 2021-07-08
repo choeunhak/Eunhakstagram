@@ -56,16 +56,16 @@ public class AuthController {
 		//이렇게만 하면 403에러가 뜸
 		//security가 csrf로 1차적으로막는거다
 		//토큰이 있나검사를한다
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error:bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				//System.out.println(error.getDefaultMessage());
-			}
-			//return "오류남";
-			throw new CustomValidationException("유효성검사실패함", errorMap);
-		}else {
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error:bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage());
+//				//System.out.println(error.getDefaultMessage());
+//			}
+//			//return "오류남";
+//			throw new CustomValidationException("유효성검사실패함", errorMap);
+//		}else {
 			//log.info(signupDto.toString());
 			User user = signupDto.toEntity();
 			
@@ -73,7 +73,7 @@ public class AuthController {
 			//System.out.println(userEntity);
 			//log.info(user.toString());
 			return "auth/signin";
-		}
+//		}
 		
 		
 	}

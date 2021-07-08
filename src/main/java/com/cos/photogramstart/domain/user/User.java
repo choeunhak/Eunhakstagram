@@ -67,4 +67,18 @@ public class User {
 		this.createDate = LocalDateTime.now();
 	}
 
+	
+	//aop에서 sysout할 때 무한참조에러해결을위해 images 제거
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", website="
+				+ website + ", bio=" + bio + ", email=" + email + ", phone=" + phone + ", gender=" + gender
+				+ ", profileImageUrl=" + profileImageUrl + ", role=" + role + ", createDate="
+				+ createDate + "]";
+	}
+	
+	
+	
+	
+
 }

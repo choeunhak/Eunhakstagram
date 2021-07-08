@@ -37,18 +37,18 @@ public class CommentApiController {
 	public ResponseEntity<?> commentSave(@AuthenticationPrincipal PrincipalDetails principalDetails, @Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){//@Requestbody는 json형태를 받기위함, 없으면 그냥 키벨류형태만받는다
 //System.out.println(commentDto); //@RequestBody 가없으면 댓글을 받지를못한다...,,,
 		
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error:bindingResult.getFieldErrors()) {
-				errorMap.put(error.getField(), error.getDefaultMessage());
-				//System.out.println(error.getDefaultMessage());
-			}
-			//return "오류남";
-			throw new CustomValidationApiException("유효성검사실패함", errorMap);
-		}
+//		if(bindingResult.hasErrors()) {
+//			Map<String, String> errorMap = new HashMap<>();
+//			
+//			for(FieldError error:bindingResult.getFieldErrors()) {
+//				errorMap.put(error.getField(), error.getDefaultMessage());
+//				//System.out.println(error.getDefaultMessage());
+//			}
+//			//return "오류남";
+//			throw new CustomValidationApiException("유효성검사실패함", errorMap);
+//		}
 		
-		
+		//위의 코드 aop폴더로 옮김
 		
 		Comment comment = commentService.댓글쓰기(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId());
 		return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기 성공", comment), HttpStatus.CREATED);

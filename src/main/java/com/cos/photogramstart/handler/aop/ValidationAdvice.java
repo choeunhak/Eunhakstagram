@@ -1,9 +1,17 @@
 package com.cos.photogramstart.handler.aop;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+
+import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 
 
 @Component
@@ -17,6 +25,32 @@ public class ValidationAdvice {
 		//proceedingJoinPoint는 profile함수의 모든곳에 접근할수있는변수
 		//메소드profile함수(등등)보다 먼저실행, commentsave도 마찬가지겠지?
 		System.out.println("webapi컨트롤러==============");
+		
+		
+		//모든 매개변수 접근 가능
+		Object[] args = proceedingJoinPoint.getArgs();//매개변수 뽑기
+		for(Object arg:args) {
+			//System.out.println(arg);
+			
+			if(arg instanceof BindingResult) {
+				System.out.println("유효성 검사를 하는 함수입니다.");
+				BindingResult bindingResult=(BindingResult)arg; //다운캐스팅
+				
+				
+				if(bindingResult.hasErrors()) {
+					Map<String, String> errorMap = new HashMap<>();
+					
+					for(FieldError error:bindingResult.getFieldErrors()) {
+						errorMap.put(error.getField(), error.getDefaultMessage());
+						//System.out.println(error.getDefaultMessage());
+					}
+					//return "오류남";
+					throw new CustomValidationApiException("유효성검사실패함", errorMap);
+				}
+				
+			}
+		}
+		
 		return proceedingJoinPoint.proceed();////return은 proceed가 그 함수로 다시 돌아가라, profile실행
 	}
 	
@@ -24,6 +58,30 @@ public class ValidationAdvice {
 	public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		
 		System.out.println("web컨트롤러==============");
+		Object[] args = proceedingJoinPoint.getArgs();//매개변수 뽑기
+		for(Object arg:args) {
+			//System.out.println(arg);
+			
+			if(arg instanceof BindingResult) {
+				//System.out.println("유효성 검사를 하는 함수입니다.");
+				BindingResult bindingResult=(BindingResult)arg; //다운캐스팅
+				
+				
+				if(bindingResult.hasErrors()) {
+					Map<String, String> errorMap = new HashMap<>();
+					
+					for(FieldError error:bindingResult.getFieldErrors()) {
+						errorMap.put(error.getField(), error.getDefaultMessage());
+						//System.out.println(error.getDefaultMessage());
+					}
+					//return "오류남";
+					throw new CustomValidationException("유효성검사실패함", errorMap);
+				}
+				
+			}
+		}
+		
+		
 		
 		return proceedingJoinPoint.proceed();
 	}
