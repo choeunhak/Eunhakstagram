@@ -34,6 +34,11 @@
 </head>
 
 <body>
+
+<!-- principalId 담기 -->
+	
+		<input type="hidden" id="principalId" value="${principal.user.id}"/>
+	<input type="hidden" id="principalUsername" value="${principal.user.username}"/>
 	
 	<header class="header">
 		<div class="container">
