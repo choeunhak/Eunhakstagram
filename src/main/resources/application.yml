@@ -37,8 +37,8 @@ spring:
       password: 1234   
     oauth2:      client:        registration:
           facebook:
-            client-id: 621259095502873
-            client-secret: 196e60707c0c8a36787f79a80a806cd5
+            client-id: 
+            client-secret: 
             scope: 
             - public_profile
             - email
