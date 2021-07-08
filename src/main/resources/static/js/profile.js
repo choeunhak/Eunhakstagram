@@ -81,7 +81,13 @@ function getSubscribeModalItem(u) {
 }
 
 // (4) 유저 프로파일 사진 변경 (완)
-function profileImageUpload() {
+function profileImageUpload(pageUserId, principalId) {
+	
+	if(pageUserId!=principalId){
+		alert("프로필 사진을 수정할 수 없는 유저입니다.")
+		
+		return;
+	}
 	$("#userProfileImageInput").click();
 
 	$("#userProfileImageInput").on("change", (e) => {
@@ -91,6 +97,33 @@ function profileImageUpload() {
 			alert("이미지를 등록해야 합니다.");
 			return;
 		}
+		
+		let profileImageForm = $("#userProfileImageForm")[0];
+		
+		//form데이터를 전송하려면 formData로 받는다
+		//form데이터 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 keyvalue쌍을 담을수있따.
+		
+		let formData = new FormData(profileImageForm); // Form태그 데이터 전송 타입을 multipart/form-data 로 만들어줌.
+
+		$.ajax({
+			type: "put",
+			url: "/api/user/" + principalId + "/profileImageUrl",
+			data: formData,
+			contentType: false, //사진전송필수  x-www-form-urlencoded로 파싱됨.
+			processData: false, //사진전송 필수 : contentType을 false로 줬을 때 쿼리 스트링으로 자동 설정됨. 그거 해제 하는 법
+			enctype: "multipart/form-data", // 필수 아님
+			dataType: "json"
+		}).done(res => {
+
+			// 사진 전송 성공시 이미지 변경
+			let reader = new FileReader();
+			reader.onload = (e) => {
+				$("#userProfileImage").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+		}).fail(error=>{
+			console.log("프로필사진업로드 오류", error)
+		});
 
 		// 사진 전송 성공시 이미지 변경
 		let reader = new FileReader();

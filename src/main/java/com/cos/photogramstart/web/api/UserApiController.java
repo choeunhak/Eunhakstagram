@@ -14,8 +14,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.user.User;
@@ -37,8 +37,20 @@ public class UserApiController {
 	private final UserService userService;
 	private final SubscribeService subscribeService;
 	
+	
+		@PutMapping("/api/user/{principalId}/profileImageUrl") // data 리턴하는 것
+		public  ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+			
+			User userEntity = userService.회원프로필사진변경(principalId, profileImageFile);
+			
+			principalDetails.setUser(userEntity);//세션변경
+	
+			return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진변경 성공", null), HttpStatus.OK);
+		}
+	
+	
 		@GetMapping("/api/user/{pageUserId}/subscribe") // data 리턴하는 것
-		public @ResponseBody ResponseEntity<?> subscribeList(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+		public ResponseEntity<?> subscribeList(@PathVariable int pageUserId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 			List<SubscribeDto> subscribeDto = subscribeService.구독리스트(principalDetails.getUser().getId(), pageUserId);
 	
 			return new ResponseEntity<>(new CMRespDto<>(1, "구독자정보리스트가져오기성공", subscribeDto), HttpStatus.OK);
