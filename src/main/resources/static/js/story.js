@@ -197,7 +197,8 @@ function addComment(imageId) {
 		commentList.prepend(content);
 		commentInput.val("");
 	}).fail(error=>{
-		console.log("댓글 생성 오류", error);
+		console.log("댓글 생성 오류", error.responseJSON.data.content);
+		alert(error.responseJSON.data.content);
 	})
 	
 	
