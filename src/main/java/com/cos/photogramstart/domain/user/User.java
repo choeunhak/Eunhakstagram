@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//pk자동증가시키기
 	private int id; 
 	
-	@Column(length = 30, unique = true)//unique 제약조건
+	@Column(length = 100, unique = true)//unique 제약조건
 	private String username;
 	
 	@Column(nullable=false)

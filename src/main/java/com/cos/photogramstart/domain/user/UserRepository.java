@@ -9,4 +9,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	//jpa method names query creation
 	User findByUsername(String username);
+
 }
