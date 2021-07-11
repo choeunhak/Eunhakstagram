@@ -27,10 +27,10 @@
                          
                          <!--회원가입 인풋-->
                         <form class="login__input" action="/auth/signup" method="post" >
-                            <input type="text" name="username" placeholder="유저네임" required="required" />
-                            <input type="password" name="password" placeholder="패스워드" required="required" />
-                            <input type="email" name="email" placeholder="이메일" required="required" />
-                            <input type="text" name="name" placeholder="이름" required="required" />
+                        	<input type="email" name="email" placeholder="이메일 주소" required="required" />
+                        	<input type="text" name="name" placeholder="성명" required="required" />
+                        	<input type="text" name="username" placeholder="사용자 이름" required="required" />
+                        	<input type="password" name="password" placeholder="비밀번호" required="required" />
                             <button>가입</button>
                         </form>
                         <!--회원가입 인풋end-->

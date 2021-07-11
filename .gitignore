@@ -33,3 +33,4 @@ build/
 .vscode/
 *.class
 src/main/resources/application.yml
+key.txt
