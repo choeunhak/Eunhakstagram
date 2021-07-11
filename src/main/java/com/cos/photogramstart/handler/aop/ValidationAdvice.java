@@ -31,12 +31,9 @@ public class ValidationAdvice {
 		Object[] args = proceedingJoinPoint.getArgs();//매개변수 뽑기
 		for(Object arg:args) {
 			//System.out.println(arg);
-			
 			if(arg instanceof BindingResult) {
 				System.out.println("유효성 검사를 하는 함수입니다.");
 				BindingResult bindingResult=(BindingResult)arg; //다운캐스팅
-				
-				
 				if(bindingResult.hasErrors()) {
 					Map<String, String> errorMap = new HashMap<>();
 					
@@ -50,7 +47,6 @@ public class ValidationAdvice {
 				
 			}
 		}
-		
 		return proceedingJoinPoint.proceed();////return은 proceed가 그 함수로 다시 돌아가라, profile실행
 	}
 	
