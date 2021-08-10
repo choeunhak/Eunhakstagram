@@ -24,8 +24,6 @@ private final UserRepository userRepository;
 	@Transactional
 	public Comment 댓글쓰기(String content, int imageId, int userId) {
 		
-		
-		
 		//팁->이렇게하면 쿼리를 안짜고 (디비에서 select하기) id값만 담아서 insert할수있따.///가짜객체만들기
 		//대신 return 시에 image객체와 user는 당연히 id값만 가지고있따.
 		//세션값은 좀 위험할수있따.
