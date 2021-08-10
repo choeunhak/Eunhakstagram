@@ -44,7 +44,6 @@ public class ValidationAdvice {
 					//return "오류남";
 					throw new CustomValidationApiException("유효성검사실패함", errorMap);
 				}
-				
 			}
 		}
 		return proceedingJoinPoint.proceed();////return은 proceed가 그 함수로 다시 돌아가라, profile실행

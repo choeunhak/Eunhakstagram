@@ -40,13 +40,13 @@ public class Subscribe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JoinColumn(name = "fromUserId")//이렇게 컬럼명 만들어라 _id이렇게하지말고
+	@JoinColumn(name = "fromUserId")//칼럼명지정
 	@ManyToOne
-	private User fromUser;  // ~~로부터  (1)
+	private User fromUser;  // ~~로부터
 	
 	@JoinColumn(name = "toUserId")
 	@ManyToOne
-	private User toUser; // ~~를  (3)
+	private User toUser; // ~~를
 	
 	public LocalDateTime createDate;
 	
