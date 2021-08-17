@@ -13,7 +13,7 @@
    
 ## DB구조
 #### ERD
-![](./images/2021-08-10-23-12-04.png)
+- [ERD](https://www.erdcloud.com/d/4o95Gzequgk6HJByx)
 
 
 ## 기능 명세
